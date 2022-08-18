@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>Company</title>
+        <meta name="description" content="Search for a country to get the latest Covid data in that place." />
+
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <link rel="icon" href="%PUBLIC_URL%/favicon.svg" type="image/svg+xml" />
+
+        <meta name="theme-color" content="#7ab784" />
+
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link href="./fonts/nunito-v25-latin-regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin />
+        <link href="./fonts/nunito-v25-latin-700.woff2" rel="preload" type="font/woff2" as="font" crossorigin />
+
+        <style>
+            @font-face {
+                font-family: 'Nunito';
+                src: url('./fonts/nunito-v25-latin-regular.woff2') format('woff2');
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'Nunito';
+                src: url('./fonts/nunito-v25-latin-700.woff2') format('woff2');
+                font-weight: 700;
+                font-style: normal;
+            }
+
+            :root {
+                --white: #ffffff;
+                --background-tone: #f7f8f9;
+                --primary-gray: #424751;
+                --secondary-gray: #666666;
+                --tertiary-gray: #dee1e6;
+                --quaternary-gray: #edeff2;
+                --headline-blue: #172b4e;
+                --headline-green: #7ab784;
+            }
+
+            *,
+            *:before,
+            *:after {
+                box-sizing: border-box;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-size: 100%;
+                font: inherit;
+                vertical-align: baseline;
+            }
+
+            html {
+                height: 100%;
+                touch-action: manipulation;
+                text-rendering: optimizeLegibility;
+                -webkit-text-size-adjust: 100%;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                background-color: var(--background-tone);
+                color: var(--primary-gray);
+            }
+
+            body {
+                height: 100%;
+                font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+                    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 1.5;
+            }
+
+            p,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                overflow-wrap: break-word;
+            }
+
+            img,
+            picture,
+            video,
+            canvas,
+            svg {
+                display: block;
+                max-width: 100%;
+            }
+
+            ol,
+            ul {
+                list-style: none;
+            }
+
+            blockquote,
+            q {
+                quotes: none;
+            }
+
+            blockquote:before,
+            blockquote:after,
+            q:before,
+            q:after {
+                content: '';
+                content: none;
+            }
+
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+            #root,
+            #loading,
+            #noscript {
+                display: flex;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            #loading,
+            #noscript {
+                position: absolute;
+                top: 0;
+                z-index: 2147483647;
+                align-items: center;
+                justify-content: center;
+                padding: 1.25rem;
+                font-weight: bold;
+                font-size: 1.25rem;
+                background-color: var(--headline-green);
+                color: var(--white);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+        <div id="loading">Loading...</div>
+        <noscript><div id="noscript">You need to enable JavaScript to run this app.</div></noscript>
+    </body>
+</html>

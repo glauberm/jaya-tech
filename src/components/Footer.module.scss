@@ -1,0 +1,28 @@
+.footer {
+    margin: 0.3rem;
+    padding: 0.875rem 1.215rem;
+    background-color: var(--quaternary-gray);
+}
+
+.logo {
+    display: block;
+    color: var(--headline-green);
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+}
+
+.hr {
+    border: 0 none;
+    border-bottom: 0.5px solid rgba(102, 102, 102, 0.325);
+    width: 100%;
+    height: 0;
+    margin-bottom: 0.35rem;
+}
+
+.copyright {
+    font-size: 0.75rem;
+    line-height: 0.875;
+    color: var(--secondary-gray);
+}
