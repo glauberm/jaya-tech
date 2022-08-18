@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    gap: 0.35rem;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.button {
+    height: 2.625em;
+    padding: 0.625em;
+    background-color: var(--headline-green);
+    color: var(--white);
+    cursor: pointer;
+
+    &:focus {
+        outline: 2px solid var(--focus-yellow);
+    }
+
+    &:active {
+        background-color: var(--focus-yellow);
+    }
+}

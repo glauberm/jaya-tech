@@ -1,3 +1,12 @@
+import SearchMapForm from '../forms/SearchMapForm';
+import styles from './IndexPage.module.scss';
+
 export default function IndexPage() {
-    return <h1>Covid report</h1>;
+    return (
+        <div>
+            <h1 className={styles.heading}>Covid report</h1>
+            <p className={styles.paragraph}>Search for a country to get the latest Covid data in that place.</p>
+            <SearchMapForm />
+        </div>
+    );
 }
