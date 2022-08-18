@@ -4,11 +4,11 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import styles from './DefaultLayout.module.scss';
 
-interface DefaultLayoutProps {
+type Props = {
     children: JSX.Element | JSX.Element[];
-}
+};
 
-export default function BaseLayout(props: DefaultLayoutProps) {
+export default function BaseLayout(props: Props) {
     useEffect(() => {
         const loading = document.getElementById('loading');
 

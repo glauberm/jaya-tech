@@ -1,25 +1,32 @@
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
-type Props = {
-    children: JSX.Element | JSX.Element[];
-};
+import Country from '../types/Country';
 
 type Context = {
-    data: object | null;
+    data: Array<Country> | null;
     error: object | null;
+    initialCoordinates: number[] | null;
 };
 
 const initialContext: Context = {
     data: null,
     error: null,
+    initialCoordinates: null,
 };
 
 export const DataContext = createContext<Context>(initialContext);
 
+type Props = {
+    children: JSX.Element | JSX.Element[];
+};
+
 export default function DataProvider(props: Props) {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
+    const [data, setData] = useState<Context['data']>(initialContext.data);
+    const [error, setError] = useState<Context['error']>(initialContext.error);
+    const [initialCoordinates, setInitialCoordinates] = useState<Context['initialCoordinates']>(
+        initialContext.initialCoordinates
+    );
 
     useEffect(() => {
         axios
@@ -32,5 +39,15 @@ export default function DataProvider(props: Props) {
             });
     }, []);
 
-    return <DataContext.Provider value={{ data, error }}>{props.children}</DataContext.Provider>;
+    useEffect(() => {
+        if (data === null) return;
+
+        const country = data.find((country) => country.countryInfo.iso3 === 'BRA');
+
+        if (country === undefined) return;
+
+        setInitialCoordinates([country.countryInfo.long, country.countryInfo.lat]);
+    }, [data]);
+
+    return <DataContext.Provider value={{ data, error, initialCoordinates }}>{props.children}</DataContext.Provider>;
 }

@@ -1,15 +1,15 @@
 import styles from './Input.module.scss';
 
-interface InputProps {
+type Props = {
     name: string;
     label: string;
     type?: string;
     placeholder?: string;
     value?: string;
     onChange?: (event?: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
-export default function Input(props: InputProps) {
+export default function Input(props: Props) {
     const { name, label, type, placeholder, value, onChange } = props;
 
     return (

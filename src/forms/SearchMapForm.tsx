@@ -19,8 +19,6 @@ export default function SearchMapForm() {
         }
     };
 
-    console.log(data);
-
     return (
         <form noValidate onSubmit={onSubmit}>
             <div className={styles.wrapper}>
