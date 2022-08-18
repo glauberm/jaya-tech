@@ -13,7 +13,7 @@ export default function Input(props: InputProps) {
     const { name, label, type, placeholder, value, onChange } = props;
 
     return (
-        <div>
+        <div className={styles.field}>
             <label htmlFor={name} className={styles.label}>
                 {label}
             </label>

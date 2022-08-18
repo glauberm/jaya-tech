@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
+import { DataContext } from '../contexts/DataProvider';
 import Input from '../components/Input';
+import Map from '../components/Map';
 import styles from './SearchMapForm.module.scss';
 
 export default function SearchMapForm() {
     const [value, setValue] = useState('');
+    const data = useContext(DataContext);
 
     const onSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -15,6 +18,8 @@ export default function SearchMapForm() {
             setValue(event.target.value);
         }
     };
+
+    console.log(data);
 
     return (
         <form noValidate onSubmit={onSubmit}>
@@ -32,6 +37,7 @@ export default function SearchMapForm() {
                 </button>
             </div>
             {value}
+            <Map value={value} />
         </form>
     );
 }

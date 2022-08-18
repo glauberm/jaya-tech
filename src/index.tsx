@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
+import DataProvider from './contexts/DataProvider';
 import Router from './routes/Router';
 
 const rootElement = document.getElementById('root');
@@ -16,7 +17,9 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <Router />
+            <DataProvider>
+                <Router />
+            </DataProvider>
         </BrowserRouter>
     </React.StrictMode>
 );
