@@ -10,11 +10,13 @@ import { Point } from 'ol/geom';
 import { Feature } from 'ol';
 import { Icon, Style } from 'ol/style';
 
+import CountryInfo from '../types/CountryInfo';
 import { DataContext } from '../contexts/DataProvider';
 import styles from './Map.module.scss';
+import pinSvg from '../images/pin.svg';
 
 type Props = {
-    value: string;
+    countryInfo: CountryInfo | null;
 };
 
 export default function Map(props: Props) {
@@ -25,46 +27,55 @@ export default function Map(props: Props) {
     useGeographic();
 
     useEffect(() => {
-        if (
-            dataProvider.countriesInfos !== null &&
-            dataProvider.initialCoordinates !== null &&
-            mapRef.current !== null
-        ) {
-            const features: Feature[] = [];
+        if (map instanceof OpenLayersMap) {
+            map.setTarget(undefined);
+            setMap(null);
+        }
 
-            dataProvider.countriesInfos.forEach(({ flag, long, lat }) => {
-                const point = new Feature({ geometry: new Point([long, lat]) });
+        if (dataProvider.initialCountryInfo !== null && mapRef.current !== null) {
+            const coordinates =
+                props.countryInfo === null
+                    ? [dataProvider.initialCountryInfo.long, dataProvider.initialCountryInfo.lat]
+                    : [props.countryInfo.long, props.countryInfo.lat];
 
-                point.setStyle(
-                    new Style({
-                        image: new Icon({
-                            src: flag,
-                            size: [250, 167],
-                            scale: 0.2,
-                        }),
-                    })
-                );
+            const point = new Feature({ geometry: new Point(coordinates) });
 
-                features.push(point);
-            });
+            point.setStyle(new Style({ image: new Icon({ src: pinSvg }) }));
+
+            const tileLayer = new TileLayer({ source: new OSM() });
+
+            const vectorLayer = new VectorLayer({ source: new VectorSource({ features: [point] }) });
 
             setMap(
                 new OpenLayersMap({
                     target: mapRef.current,
-                    layers: [
-                        new TileLayer({ source: new OSM() }),
-                        new VectorLayer({ source: new VectorSource({ features: features }) }),
-                    ],
+                    layers: [tileLayer, vectorLayer],
                     view: new View({
-                        center: dataProvider.initialCoordinates,
+                        center: coordinates,
                         zoom: 5,
-                        minZoom: 5,
                     }),
                     controls: [],
                 })
             );
         }
-    }, [mapRef, dataProvider.initialCoordinates]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dataProvider.initialCountryInfo, props.countryInfo]);
 
-    return <div ref={mapRef} className={styles.map}></div>;
+    useEffect(() => {
+        if (map === null) return;
+
+        map.on('singleclick', function (event) {
+            console.log(event);
+        });
+    }, [map]);
+
+    return (
+        <div className={styles.container}>
+            <div ref={mapRef} className={styles.map} />
+        </div>
+    );
 }
+
+Map.defaultProps = {
+    countryInfo: null,
+};
