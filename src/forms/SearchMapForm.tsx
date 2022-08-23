@@ -10,7 +10,7 @@ import styles from './SearchMapForm.module.scss';
 export default function SearchMapForm() {
     const [value, setValue] = useState<string>('');
     const [countryInfo, setCountryInfo] = useState<CountryInfo | null>(null);
-    const dataProvider = useContext(DataContext);
+    const { searchCountryInfo } = useContext(DataContext);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedSetCountryInfo = useCallback(debounce(setCountryInfo, 300), []);
 
@@ -25,8 +25,8 @@ export default function SearchMapForm() {
     };
 
     useEffect(() => {
-        debouncedSetCountryInfo(dataProvider.searchCountryInfo(value));
-    }, [debouncedSetCountryInfo, dataProvider, value]);
+        debouncedSetCountryInfo(searchCountryInfo(value));
+    }, [debouncedSetCountryInfo, searchCountryInfo, value]);
 
     return (
         <form noValidate onSubmit={onSubmit}>
