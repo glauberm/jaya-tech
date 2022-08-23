@@ -6,16 +6,18 @@ import CountryInfo from '../types/CountryInfo';
 
 type Context = {
     data: Array<Country> | null;
-    error: object | null;
+    error: boolean;
     initialCountryInfo: CountryInfo | null;
-    searchCountryInfo: (searchVal: string) => CountryInfo | null;
+    searchCountryInfo: (countryName: string) => CountryInfo | null;
+    searchCountry: (countryIso3: string) => Country | null;
 };
 
 const initialContext: Context = {
     data: null,
-    error: null,
+    error: false,
     initialCountryInfo: null,
-    searchCountryInfo: (searchVal: string) => null,
+    searchCountryInfo: (countryName: string) => null,
+    searchCountry: (countryIso3: string) => null,
 };
 
 export const DataContext = createContext<Context>(initialContext);
@@ -31,14 +33,24 @@ export default function DataProvider(props: Props) {
         initialContext.initialCountryInfo
     );
 
-    const searchCountryInfo = (searchVal: string) => {
+    const searchCountryInfo = (countryName: string) => {
         if (data === null) return null;
 
-        const country = data.find(({ country }) => country === searchVal);
+        const country = data.find(({ country }) => country === countryName);
 
         if (country === undefined) return null;
 
         return country.countryInfo;
+    };
+
+    const searchCountry = (countryIso3: string) => {
+        if (data === null) return null;
+
+        const country = data.find(({ countryInfo }) => countryInfo.iso3 === countryIso3);
+
+        if (country === undefined) return null;
+
+        return country;
     };
 
     useEffect(() => {
@@ -51,8 +63,8 @@ export default function DataProvider(props: Props) {
             .then((response) => {
                 setData(response.data);
             })
-            .catch((error) => {
-                setError(error);
+            .catch(() => {
+                setError(true);
             });
     }, []);
 
@@ -67,7 +79,7 @@ export default function DataProvider(props: Props) {
     }, [data]);
 
     return (
-        <DataContext.Provider value={{ data, error, initialCountryInfo, searchCountryInfo }}>
+        <DataContext.Provider value={{ data, error, initialCountryInfo, searchCountryInfo, searchCountry }}>
             {props.children}
         </DataContext.Provider>
     );

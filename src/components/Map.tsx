@@ -68,6 +68,13 @@ export default function Map(props: Props) {
             });
 
             setMap(map);
+
+            return () => {
+                if (map instanceof OpenLayersMap) {
+                    map.setTarget(undefined);
+                    setMap(null);
+                }
+            };
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initialCountryInfo, props.countryInfo, navigate]);

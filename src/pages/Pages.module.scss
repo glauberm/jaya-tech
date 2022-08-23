@@ -1,0 +1,30 @@
+.heading {
+    font-size: 1.5em;
+    margin-bottom: 0.2em;
+    color: var(--headline-blue);
+    font-weight: 600;
+}
+
+.paragraph {
+    margin-bottom: 1em;
+}
+
+.descriptionList {
+    dt {
+        display: inline;
+        font-weight: 700;
+
+        &::after {
+            content: ': ';
+        }
+    }
+
+    dd {
+        display: inline;
+    }
+
+    div:last-child {
+        font-size: 0.8em;
+        margin-top: 1em;
+    }
+}

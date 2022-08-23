@@ -3,6 +3,17 @@
     height: auto;
 }
 
+.wrapper {
+    margin-bottom: 1.5rem;
+}
+
+.inner {
+    display: flex;
+    gap: 0.35rem;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
 .label {
     font-size: 0.875em;
     color: var(--secondary-gray);
@@ -19,4 +30,13 @@
     &:focus {
         outline: 2px solid var(--focus-yellow);
     }
+}
+
+.errorInput {
+    border-color: var(--error-red);
+}
+
+.errorMessage {
+    font-size: 0.8em;
+    color: var(--error-red);
 }

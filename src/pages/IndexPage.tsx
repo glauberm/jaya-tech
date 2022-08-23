@@ -1,5 +1,5 @@
 import SearchMapForm from '../forms/SearchMapForm';
-import styles from './IndexPage.module.scss';
+import styles from './Pages.module.scss';
 
 export default function IndexPage() {
     return (
